@@ -49,7 +49,7 @@ export default () => {
     return <Box m={1}>
         <Grid container spacing={1}>
             <Grid item xs={3}>
-                <Tooltip title="Number of nodes of the graph">
+                <Tooltip placement="top" title="Number of nodes of the graph">
                     <TextField
                         label="Number of nodes"
                         type="number"
@@ -58,7 +58,7 @@ export default () => {
                 </Tooltip>
             </Grid>
             <Grid item xs={3}>
-                <Tooltip title="How likely will be to create an edge between two nodes">
+                <Tooltip placement="top" title="How likely will be to create an edge between two nodes">
                     <TextField
                         label="Edge density"
                         type="number"
@@ -67,7 +67,7 @@ export default () => {
                 </Tooltip>
             </Grid>
             <Grid item xs={3}>
-                <Tooltip title="Minimun value for an edge">
+                <Tooltip placement="top" title="Minimun value for an edge">
                     <TextField
                         label="Minimun value"
                         type="number"
@@ -76,7 +76,7 @@ export default () => {
                 </Tooltip>
             </Grid>
             <Grid item xs={3}>
-                <Tooltip title="Maximun value for an edge">
+                <Tooltip placement="top" title="Maximun value for an edge">
                     <TextField
                         label="Maximun value"
                         type="number"
