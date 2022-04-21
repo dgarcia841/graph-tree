@@ -157,14 +157,21 @@ export class GraphDrawing {
      */
     public drawEdges() {
         if (!this.graph) return;
+
+        // Maximun finite edge value
         const maxValue = this.graph.getMaxFinite();
+        // Loop over every node in the graph
         for (let i = 0; i < this.graph.size; i++) {
+            // the current node
             const from = this.nodes[i];
+            // get all the nodes connected to the current one
             const nodes = this.graph.getConnectedNodes(i);
             for (let j = 0; j < nodes.length; j++) {
+                // draw the line between the current node i, and the connected node j
                 const to = this.nodes[nodes[j]];
                 const line = this.renderer.makeLine(from.x, from.y, to.x, to.y);
 
+                // get edge value and set the color of the line
                 const value = this.graph.getEdge(i, nodes[j]);
                 const relative = value / maxValue;
                 const rgb = General.interpolateColors(relative, this.options.edgeMin, this.options.edgeMax);
@@ -221,9 +228,21 @@ export namespace GraphDrawing {
          */
         levelGap: number,
 
+        /**
+         * RGB color to fill the node circles
+         */
         nodeFill?: General.IColor,
+        /**
+         * RGB color to stroke the node circles
+         */
         nodeStroke?: General.IColor,
+        /**
+         * RGB color for the minimun values in edges
+         */
         edgeMin?: General.IColor,
+        /**
+         * RGB color for the maximun values in edges
+         */
         edgeMax?: General.IColor
     }
 
