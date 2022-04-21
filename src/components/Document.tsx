@@ -14,7 +14,7 @@ export default () => {
             Graphs algorithms
         </Typography>
         <Typography variant="subtitle1">
-            This program implements the minimun spanning tree for a connected graph, and
+            This program implements the minimun spanning tree algorithm for a connected graph, and
             finds the shortest path between two points in the resulting minimun spanning tree.
         </Typography>
         <Typography variant="subtitle1">
