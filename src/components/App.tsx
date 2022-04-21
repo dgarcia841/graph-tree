@@ -9,6 +9,10 @@ export default () => {
         {graps.map((grap, i) => <GraphContainer
             key={i}
             graph={grap}
+            options={{
+                drawNodes: true,
+                drawEdges: i % 2 == 0
+            }}
             style={{
                 width: 640,
                 height: 480,

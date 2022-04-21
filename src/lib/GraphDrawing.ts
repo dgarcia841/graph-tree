@@ -37,8 +37,8 @@ export class GraphDrawing {
      * Creates a new drawing for graphs
      * @param element The HTML element to draw in
      */
-    constructor(element: HTMLElement, options = GraphDrawing.defaultOptions) {
-        this.options = options;
+    constructor(element: HTMLElement, options: Partial<GraphDrawing.IOptions> = GraphDrawing.defaultOptions) {
+        this.options = { ...GraphDrawing.defaultOptions, ...options };
         this.renderer = new Two().appendTo(element);
         this.nodes = [];
         this.edges = [];
@@ -131,6 +131,18 @@ export class GraphDrawing {
                     value: graph.getEdge(i, connected[j])
                 })
             }
+        }
+    }
+
+    /**
+     * Draw the graph
+     */
+    public draw() {
+        if (this.options.drawEdges) {
+            this.drawEdges();
+        }
+        if (this.options.drawNodes) {
+            this.drawNodes();
         }
     }
 
@@ -243,7 +255,15 @@ export namespace GraphDrawing {
         /**
          * RGB color for the maximun values in edges
          */
-        edgeMax?: General.IColor
+        edgeMax?: General.IColor,
+        /**
+         * When calling `.draw()`, draw the nodes?
+         */
+        drawNodes?: boolean,
+        /**
+         * When calling `.draw()`, draw the edges?
+         */
+        drawEdges?: boolean
     }
 
     /**
@@ -272,6 +292,8 @@ export namespace GraphDrawing {
         nodeFill: General.rgb(128, 128, 255),
         nodeStroke: General.rgb(0, 0, 0),
         edgeMin: General.rgb(255, 0, 0),
-        edgeMax: General.rgb(0, 255, 0)
+        edgeMax: General.rgb(0, 255, 0),
+        drawNodes: true,
+        drawEdges: true
     }
 }

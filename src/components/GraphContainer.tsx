@@ -13,7 +13,7 @@ export default ({ graph, options, ...props }: {
     /**
      * graph dragin options
      */
-    options?: GraphDrawing.IOptions
+    options?: Partial<GraphDrawing.IOptions>
 } & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>) => {
 
     const ref = useRef<HTMLDivElement>(null);
@@ -23,8 +23,7 @@ export default ({ graph, options, ...props }: {
         const rect = ref.current.getBoundingClientRect();
         const drawing = new GraphDrawing(ref.current, options);
         drawing.setGraph(graph);
-        drawing.drawEdges();
-        drawing.drawNodes();
+        drawing.draw();
         drawing.resize(rect.width, rect.height);
     }, [graph, options, props]);
 
