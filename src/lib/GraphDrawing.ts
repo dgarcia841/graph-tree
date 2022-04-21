@@ -1,6 +1,6 @@
 import Two from "two.js";
-import { General } from "../lib/General";
-import { Graph } from "../lib/Graph";
+import { General } from "./General";
+import { Graph } from "./Graph";
 
 /**
  * Class for drawing graphs in the screen. The graphs are drawn

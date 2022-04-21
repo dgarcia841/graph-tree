@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { GraphDrawing } from "../drawing/GraphDrawing";
+import { GraphDrawing } from "../lib/GraphDrawing";
 import { Graph } from "../lib/Graph";
 
 /**
