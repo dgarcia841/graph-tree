@@ -11,7 +11,7 @@ export default ({ graph, options, ...props }: {
      */
     graph: Graph,
     /**
-     * graph dragin options
+     * graph drawing options
      */
     options?: Partial<GraphDrawing.IOptions>
 } & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>) => {
