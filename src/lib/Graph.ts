@@ -1,4 +1,5 @@
 import { General } from "./General";
+import { GraphDrawing } from "./GraphDrawing";
 
 /**
  * The Graph class. Unexisting edges are set as Infinity.
@@ -8,6 +9,8 @@ export class Graph {
      * Adjacency matrix
      */
     private matrix: number[][];
+
+    private drawing?: GraphDrawing;
 
     /**
      * Creates a graph
@@ -21,6 +24,20 @@ export class Graph {
      */
     public get size() {
         return this.matrix.length;
+    }
+
+    /**
+     * Sets the drawing object refference
+     */
+    public setDrawing(drawing: GraphDrawing) {
+        this.drawing = drawing;
+        return this;
+    }
+    /**
+     * Gets the drawing object refference
+     */
+    public getDrawing() {
+        return this.drawing;
     }
 
     /**

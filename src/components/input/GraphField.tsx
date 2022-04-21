@@ -10,7 +10,7 @@ function getGraphString() {
 }
 
 function Field({ value, onChange }: { value: string, onChange: (value: string) => void }) {
-    
+
     const [text, setText] = useState(value);
 
     useEffect(() => setText(value), [value]);
@@ -24,13 +24,11 @@ function Field({ value, onChange }: { value: string, onChange: (value: string) =
                 maxRows={20}
                 inputProps={{
                     style: {
-                        whiteSpace: "pre"
+                        whiteSpace: "pre",
+                        fontFamily: "monospace",
                     }
                 }}
-                sx={{
-                    width: "100%",
-                    fontFamily: "monospace",
-                }} />
+                sx={{ width: "100%" }} />
         </Grid>
         <Grid item xs={12}>
             <Button variant="contained" onClick={() => onChange(text)}>accept</Button>
