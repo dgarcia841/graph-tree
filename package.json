@@ -21,7 +21,13 @@
     "url": "https://github.com/dgarcia841/graph-tree/issues"
   },
   "homepage": "https://github.com/dgarcia841/graph-tree#readme",
-  "dependencies": {},
+  "dependencies": {
+    "@types/react": "^18.0.5",
+    "@types/react-dom": "^18.0.1",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "two.js": "^0.8.5"
+  },
   "devDependencies": {
     "@webpack-cli/generators": "^2.4.2",
     "css-loader": "^6.7.1",

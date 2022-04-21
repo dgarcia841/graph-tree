@@ -49,7 +49,7 @@ export class Graph {
      * @param a Origin node
      * @returns List of connected nodes
      */
-    public getEdges(a: number) {
+    public getConnectedNodes(a: number) {
         return this.matrix
             .map((row, i) => [row[a], i])
             .filter(([row]) => Number.isFinite(row))

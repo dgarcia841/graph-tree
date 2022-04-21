@@ -47,4 +47,76 @@ export namespace General {
     export function equals(a: number, b: number) {
         return Math.abs(a - b) <= tolerance;
     }
+
+    /**
+     * Gets the maximun value in a numbers list
+     * @param values List of value to check
+     * @returns Max value in the list
+     */
+    export function maxValue(values: number[]) {
+        let max = -Infinity;
+        for (let i = 0; i < values.length; i++) {
+            if (values[i] > max) {
+                max = values[i];
+            }
+        }
+        return max;
+    }
+
+    /**
+     * RGB Color representation
+     */
+    export interface IColor {
+        /**
+         * RED component (1-255)
+         */
+        r: number,
+        /**
+         * GREEN component (1-255)
+         */
+        g: number,
+        /**
+         * BLUE component (1-255)
+         */
+        b: number
+    }
+
+    export function rgb(r: number, g: number, b: number): IColor {
+        return { r, g, b };
+    }
+    /**
+     * Interpolates a value between two colors
+     * @param value Value to interpolate, between 0 and 1.
+     * @param colorA Initial color (value = 0)
+     * @param colorB Final color (value = 1)
+     * @returns Interpolared color
+     */
+    export function interpolateColors(value: number, colorA?: IColor, colorB?: IColor): IColor {
+        if (!colorA) colorA = rgb(0, 0, 0);
+        if (!colorB) colorB = rgb(0, 0, 0);
+        const interpolate = (v: number, a: number, b: number) => Math.floor(a + (b - a) * v);
+        const r = interpolate(value, colorA.r, colorB.r);
+        const g = interpolate(value, colorA.g, colorB.g);
+        const b = interpolate(value, colorA.b, colorB.b);
+
+        return { r, g, b };
+    }
+
+    /**
+     * Converts a RGB color object into a #RRGGBB hex string
+     * @param color RGB color object
+     */
+    export function rgbToHex(color?: IColor): string {
+        if (!color) return "#000000";
+        /**
+         * Convert to HEX
+         */
+        const hex = (x: number) => Math.floor(Math.max(0, Math.min(255, x))).toString(16);
+        /**
+         * Adjust to two digits
+         */
+        const two = (x: string) => "0".repeat(Math.max(0, 2 - x.length)) + x;
+
+        return "#" + two(hex(color.r)) + two(hex(color.g)) + two(hex(color.b));
+    }
 }
