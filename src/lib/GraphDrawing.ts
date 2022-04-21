@@ -220,6 +220,35 @@ export class GraphDrawing {
         svg.setAttribute("width", width + "");
         svg.setAttribute("height", height + "");
     }
+
+    /**
+     * Gets the resulting SVG as a object URL
+     */
+    public getObjectURL(): string {
+        /**
+         * The SVG Dom Element
+         */
+        const svg = this.renderer.renderer.domElement as SVGElement;
+
+        // save the current dimensions
+        const width = svg.getAttribute("width") ?? "";
+        const height = svg.getAttribute("height") ?? "";
+        // and clear it
+        svg.removeAttribute("width");
+        svg.removeAttribute("height");
+
+        // convert to a valid XML source
+        const as_text = new XMLSerializer().serializeToString(svg);
+        // store in a Blob
+        const blob = new Blob([as_text], { type: "image/svg+xml" });
+        // create an URI pointing to that blob
+        const url = URL.createObjectURL(blob);
+
+        // restore the dimensions
+        svg.setAttribute("width", width);
+        svg.setAttribute("height", height);
+        return url;
+    }
 }
 
 export namespace GraphDrawing {

@@ -113,32 +113,7 @@ export class Graph {
         min = 1,
         max = 10,
         density = 0.1
-    }: {
-        /**
-         * Number of nodes
-         */
-        size?: number,
-        /**
-         * Is the graph directed or not?
-         */
-        directed?: boolean,
-        /**
-         * Minimun edge value
-         */
-        min?: number,
-        /**
-         * Maximun edge value
-         */
-        max?: number,
-        /**
-         * Probability of creating additional edges between nodes, where
-         * `density = 1` means that every single node will be connected
-         * to every other in the graph, and `density = 0` means that
-         * the only edges that will be created are those that
-         * connect all the nodes in a single path.
-         */
-        density?: number
-    }) {
+    }: Graph.IGenerateRandomProps) {
 
         // 1. Creates an unconnected graph of the specified size
         const grap = new Graph(size);
@@ -241,5 +216,35 @@ export class Graph {
             }
         }
         return grap;
+    }
+}
+
+
+export namespace Graph {
+    export interface IGenerateRandomProps {
+        /**
+         * Number of nodes
+         */
+        size?: number,
+        /**
+         * Is the graph directed or not?
+         */
+        directed?: boolean,
+        /**
+         * Minimun edge value
+         */
+        min?: number,
+        /**
+         * Maximun edge value
+         */
+        max?: number,
+        /**
+         * Probability of creating additional edges between nodes, where
+         * `density = 1` means that every single node will be connected
+         * to every other in the graph, and `density = 0` means that
+         * the only edges that will be created are those that
+         * connect all the nodes in a single path.
+         */
+        density?: number
     }
 }
