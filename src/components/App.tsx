@@ -3,10 +3,11 @@ import { General } from "../lib/General";
 import { Graph } from "../lib/Graph";
 import GraphContainer from "./GraphContainer";
 
-const graps = General.makeArray(100, () => Graph.generateRandom({ size: General.irandom(10, 250), density: 0 }));
+const graps = General.makeArray(100, () => Graph.generateRandom({ size: General.irandom(10, 50), density: 0.3 }));
 export default () => {
     return <div>
-        {graps.map(grap => <GraphContainer
+        {graps.map((grap, i) => <GraphContainer
+            key={i}
             graph={grap}
             style={{
                 width: 640,
