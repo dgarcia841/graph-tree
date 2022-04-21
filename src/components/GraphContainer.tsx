@@ -2,7 +2,19 @@ import React, { useEffect, useRef } from "react";
 import { GraphDrawing } from "../drawing/GraphDrawing";
 import { Graph } from "../lib/Graph";
 
-export default ({ graph, options, ...props }: { graph: Graph, options?: GraphDrawing.IOptions} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>) => {
+/**
+ * React component that renders a graph in the app
+ */
+export default ({ graph, options, ...props }: {
+    /**
+     * The graph to draw
+     */
+    graph: Graph,
+    /**
+     * graph dragin options
+     */
+    options?: GraphDrawing.IOptions
+} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>) => {
 
     const ref = useRef<HTMLDivElement>(null);
 

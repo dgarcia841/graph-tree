@@ -8,6 +8,14 @@ export namespace General {
     export function irandom(min: number, max: number) {
         return min + Math.floor((max - min) * Math.random());
     }
+
+    /**
+     * Choose a random element from the specified values
+     * @param args Elements to choose
+     */
+    export function choose<T>(...args: T[]): T {
+        return args[irandom(0, args.length)];
+    }
     /**
      * Shuffles an array. **NOTE:** It **does mutate** the original array,
      * instead of making a copy.
@@ -19,9 +27,9 @@ export namespace General {
         while (array.length > 0) {
             const index = irandom(0, array.length);
             const dequeue = array.splice(index, 1);
-            result.push(...dequeue);
+            dequeue.forEach(x => result.push(x));
         }
-        array.push(...result);
+        result.forEach(x => array.push(x));
         return array;
     }
     /**
@@ -118,5 +126,15 @@ export namespace General {
         const two = (x: string) => "0".repeat(Math.max(0, 2 - x.length)) + x;
 
         return "#" + two(hex(color.r)) + two(hex(color.g)) + two(hex(color.b));
+    }
+
+    /**
+     * Creates and array and uses a function to map the elements in it
+     * @param size The array size
+     * @param map The function to map the elements
+     * @returns The created array
+     */
+    export function makeArray<T>(size: number, map: (index: number) => T): T[] {
+        return new Array(size).fill(0).map((_, i) => map(i));
     }
 }
