@@ -1,6 +1,7 @@
 import Two from "two.js";
 import { General } from "./General";
 import { Graph } from "./Graph";
+import { Vector } from "./Vector";
 
 /**
  * Class for drawing graphs in the screen. The graphs are drawn
@@ -22,7 +23,7 @@ export class GraphDrawing {
     /**
      * The positions for the nodes to draw
      */
-    private nodes: GraphDrawing.IPosition[];
+    private nodes:Vector.IPoint[];
 
     /**
      * The positions for the edges to draw
@@ -32,7 +33,7 @@ export class GraphDrawing {
     /**
      * The drawing size
      */
-    private size: GraphDrawing.IPosition;
+    private size: Vector.IPoint;
     /**
      * Creates a new drawing for graphs
      * @param element The HTML element to draw in
@@ -154,7 +155,7 @@ export class GraphDrawing {
 
         this.nodes.forEach(node => {
             // Draw the circle
-            const figure = this.renderer.makeCircle(node.x, node.y, 8);
+            const figure = this.renderer.makeCircle(node.x, node.y, this.options.nodeRadius);
             // Set the border color
             figure.stroke = General.rgbToHex(this.options.nodeStroke);
             // Set the fill color
@@ -181,10 +182,22 @@ export class GraphDrawing {
             for (let j = 0; j < nodes.length; j++) {
                 // draw the line between the current node i, and the connected node j
                 const to = this.nodes[nodes[j]];
-                const line = this.renderer.makeLine(from.x, from.y, to.x, to.y);
 
-                // get edge value and set the color of the line
+                // get edge value
                 const value = this.graph.getEdge(i, nodes[j]);
+                // get transposed edge value
+                const tValue = this.graph.getEdge(nodes[j], i);
+                // are the edge bidirectional
+                const bidirection = General.equals(value, tValue);
+
+                // Draw a line if the edge is bidirectional, or an arrow if is directed
+                const vect = new Vector(from.x, from.y, to.x, to.y);
+                vect.setSize(vect.getSize() - this.options.nodeRadius);
+                const line = bidirection ?
+                    this.renderer.makeLine(from.x, from.y, to.x, to.y) :
+                    this.renderer.makeArrow(vect.x1, vect.y1, vect.x2, vect.y2, this.options.nodeRadius);
+
+                // Set the line color according to its value relative to the maximun
                 const relative = value / maxValue;
                 const rgb = General.interpolateColors(relative, this.options.edgeMin, this.options.edgeMax);
                 const hex = General.rgbToHex(rgb);
@@ -270,6 +283,11 @@ export namespace GraphDrawing {
         levelGap: number,
 
         /**
+         * Radius of a node circle
+         */
+        nodeRadius: number,
+
+        /**
          * RGB color to fill the node circles
          */
         nodeFill?: General.IColor,
@@ -296,19 +314,11 @@ export namespace GraphDrawing {
     }
 
     /**
-     * A basic position coordinates
-     */
-    export interface IPosition {
-        x: number,
-        y: number
-    }
-
-    /**
      * Coordinates of an edge
      */
     export interface IEdge {
-        a: IPosition,
-        b: IPosition,
+        a: Vector.IPoint,
+        b: Vector.IPoint,
         value: number
     }
     /**
@@ -318,6 +328,7 @@ export namespace GraphDrawing {
         levelNodes: 8,
         levelRadius: 64,
         levelGap: 0.15,
+        nodeRadius: 8,
         nodeFill: General.rgb(128, 128, 255),
         nodeStroke: General.rgb(0, 0, 0),
         edgeMin: General.rgb(255, 0, 0),
