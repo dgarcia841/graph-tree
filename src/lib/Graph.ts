@@ -18,7 +18,7 @@ export class Graph {
      * @param size Number of nodes of the graph
      */
     constructor(size: number) {
-        this.matrix = new Array(size).fill(0).map(() => new Array(size).fill(Infinity));
+        this.matrix = General.makeArray(size, () => General.makeArray(size, () => Infinity));
     }
     /**
      * Number of nodes of the graph
