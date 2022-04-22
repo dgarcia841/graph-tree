@@ -154,7 +154,7 @@ export class Graph {
 
         // 2. Connect every node in the graph
         // 2.1. Creates a list from 0 to n - 1 and shuffles it
-        const path = General.shuffle(new Array(size).fill(0).map((_, i) => i));
+        const path = General.shuffle(General.makeArray(size, i => i));
         // 2.2. Group the generated list items as pairs of nodes, and connect them
         for (let i = 0; i < size - 1; i++) {
             // 2.3. Get the pair
