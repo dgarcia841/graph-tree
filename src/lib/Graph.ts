@@ -1,5 +1,6 @@
 import { General } from "./General";
 import { GraphDrawing } from "./GraphDrawing";
+import { PriorityQueue } from "./PriorityQueue";
 
 /**
  * The Graph class. Unexisting edges are set as Infinity.
@@ -86,6 +87,22 @@ export class Graph {
             });
         });
         return max;
+    }
+
+    /**
+     * Gets a list of edges, pair of nodes in the form `[node, node, value]`.
+     * Sorted from minimun to maximun
+     */
+    public getEdges(): [a: number, b: number, v: number][] {
+        const queue = new PriorityQueue<[a: number, b: number, v: number]>();
+        for (let i = 0; i < this.size; i++) {
+            for (let j = 0; j < this.size; j++) {
+                const value = this.getEdge(i, j);
+                if(Number.isFinite(value))
+                    queue.enqueue([i, j, value], value);
+            }
+        }
+        return queue.dequeueAll();
     }
     /**
      * Converts the graph's adjacency matrix to string

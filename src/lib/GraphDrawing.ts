@@ -153,9 +153,10 @@ export class GraphDrawing {
     public drawNodes() {
         if (!this.graph) return;
 
-        this.nodes.forEach(node => {
+        this.nodes.forEach((node, i) => {
             // Draw the circle
             const figure = this.renderer.makeCircle(node.x, node.y, this.options.nodeRadius);
+            this.renderer.makeText(i + "", node.x, node.y, { alignment: "center" });
             // Set the border color
             figure.stroke = General.rgbToHex(this.options.nodeStroke);
             // Set the fill color
@@ -192,10 +193,15 @@ export class GraphDrawing {
 
                 // Draw a line if the edge is bidirectional, or an arrow if is directed
                 const vect = new Vector(from.x, from.y, to.x, to.y);
-                vect.setSize(vect.getSize() - this.options.nodeRadius);
+                const len = vect.getSize();
+                vect.setSize(len- this.options.nodeRadius);
                 const line = bidirection ?
                     this.renderer.makeLine(from.x, from.y, to.x, to.y) :
                     this.renderer.makeArrow(vect.x1, vect.y1, vect.x2, vect.y2, this.options.nodeRadius);
+                
+                // draw the text
+                vect.setSize(len - 16);
+                this.renderer.makeText(value + "", vect.x2, vect.y2, {alignment: "center"});
 
                 // Set the line color according to its value relative to the maximun
                 const relative = value / maxValue;

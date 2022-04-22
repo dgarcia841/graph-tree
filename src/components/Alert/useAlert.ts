@@ -17,8 +17,9 @@ export default function useAlert(destroyTime = 3000) {
          * Adds a new alert to the component and destroys it after some time
          * @param content Alert content
          * @param type Alert type
+         * @param destroy Time (in ms) to destroy the alert
          */
-        add(content: IAlert["content"], type?: IAlert["type"]) {
+        add(content: IAlert["content"], type?: IAlert["type"], destroy = destroyTime) {
             const alert: IAlert = { content, type };
             alerts.push(alert);
             update();
@@ -27,7 +28,7 @@ export default function useAlert(destroyTime = 3000) {
                 if (index == -1) return;
                 alerts.splice(index, 1);
                 update();
-            }, destroyTime);
+            }, destroy);
         },
         /**
          * Gets the list of active alerts

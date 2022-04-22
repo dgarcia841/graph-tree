@@ -1,3 +1,4 @@
+import MinimunSpanningTree from "../lib/algorithms/MinimunSpanningTree";
 import { Graph } from "../lib/Graph";
 
 class Model {
@@ -12,11 +13,13 @@ class Model {
     }
 
     private graph?: Graph;
+    private MST?: [number, Graph];
     private _onUpdate?: () => void;
     private constructor() { }
 
     public generateRandomGraph(props: Graph.IGenerateRandomProps) {
         this.graph = Graph.generateRandom(props);
+        this.MST = undefined;
     }
     
     public getGraph() {
@@ -24,6 +27,7 @@ class Model {
     }
     public setGraph(graph: Graph) {
         this.graph = graph;
+        this.MST = undefined;
     }
 
     public onUpdate(event: () => void) {
@@ -34,6 +38,14 @@ class Model {
     public update() {
         this._onUpdate?.();
         return this;
+    }
+
+    public getMST() {
+        if (!this.graph) return undefined;
+        if (!this.MST) {
+            this.MST = MinimunSpanningTree(this.graph);
+        }
+        return this.MST;
     }
 }
 

@@ -3,6 +3,7 @@ import React, { useReducer } from "react"
 import Model from "../Model"
 import GraphField from "./input/GraphField"
 import GraphGenerate from "./input/GraphGenerate"
+import GraphSpanningTree from "./input/GraphSpanningTree"
 import GraphVisualize from "./input/GraphVisualize"
 
 export default () => {
@@ -38,5 +39,12 @@ export default () => {
             Visualize the graph
         </Typography>
         <GraphVisualize />
+        <Typography variant="h2">
+            Find the minimun spanning tree
+        </Typography>
+        <Typography variant="body1">
+            Find the input graph's minimun spanning tree by using an implementation of PRIM's algorithm.
+        </Typography>
+        <GraphSpanningTree />
     </React.Fragment>
 }
