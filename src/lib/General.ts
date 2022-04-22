@@ -137,4 +137,20 @@ export namespace General {
     export function makeArray<T>(size: number, map: (index: number) => T): T[] {
         return new Array(size).fill(0).map((_, i) => map(i));
     }
+
+    /**
+     * Downloads a file to the client
+     * @param filename Filename
+     * @param content File content
+     */
+     export function downloadFile(filename: string, content: string) {
+        const element = document.createElement("a");
+        element.style.display = "none";
+        element.setAttribute("href", "data:text/plain;charset=utf-8," + encodeURIComponent(content))
+        element.setAttribute("download", filename);
+
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+    }
 }

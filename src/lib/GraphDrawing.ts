@@ -159,7 +159,7 @@ export class GraphDrawing {
         this.nodes.forEach((node, i) => {
             // Draw the circle
             const figure = this.renderer.makeCircle(node.x, node.y, this.options.nodeRadius);
-            this.renderer.makeText(i + "", node.x, node.y, { alignment: "center" });
+            this.renderer.makeText(i + "", node.x, node.y, { alignment: "center", fill: "white" });
             // Set the border color
             figure.stroke = General.rgbToHex(this.options.nodeStroke);
             // Set the fill color
@@ -190,7 +190,7 @@ export class GraphDrawing {
                 const len = vect.getSize();
                 // draw the text
                 vect.setSize(len - 16);
-                this.renderer.makeText(value + "", vect.x2, vect.y2, {alignment: "center"});
+                this.renderer.makeText(value + "", vect.x2, vect.y2, {alignment: "center", fill: "white"});
             }
             this.renderer.update();
         }
@@ -268,7 +268,7 @@ export class GraphDrawing {
     /**
      * Gets the resulting SVG as a object URL
      */
-    public getObjectURL(): string {
+    public getSvgString(): string {
         /**
          * The SVG Dom Element
          */
@@ -283,15 +283,11 @@ export class GraphDrawing {
 
         // convert to a valid XML source
         const as_text = new XMLSerializer().serializeToString(svg);
-        // store in a Blob
-        const blob = new Blob([as_text], { type: "image/svg+xml" });
-        // create an URI pointing to that blob
-        const url = URL.createObjectURL(blob);
 
         // restore the dimensions
         svg.setAttribute("width", width);
         svg.setAttribute("height", height);
-        return url;
+        return as_text;
     }
 }
 

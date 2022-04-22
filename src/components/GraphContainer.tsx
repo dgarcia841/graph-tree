@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { GraphDrawing } from "../lib/GraphDrawing";
 import { Graph } from "../lib/Graph";
 import { Box, Button, ButtonGroup, Dialog, DialogContent, Paper } from "@mui/material";
+import { General } from "../lib/General";
 
 /**
  * React component that renders a graph in the app
@@ -21,6 +22,8 @@ export default ({ graph, options, ...props }: {
 
     const [viewMatrix, setViewMatrix] = useState(false);
 
+    const svgstr = () => graph.getDrawing()?.getSvgString() ?? "";
+
     useEffect(() => {
         if (!ref.current) return;
         const rect = ref.current.getBoundingClientRect();
@@ -38,7 +41,12 @@ export default ({ graph, options, ...props }: {
         <Box display="flex" justifyContent="flex-end">
             <ButtonGroup variant="outlined">
                 <Button onClick={() => setViewMatrix(true)}>View matrix</Button>
-                <Button onClick={() => window.open(graph.getDrawing()?.getObjectURL())}>Open in new tab</Button>
+                <Button onClick={() => window.open(URL.createObjectURL(new Blob([svgstr()], { type: "image/svg+xml" })))}>
+                    Open in new tab
+                </Button>
+                <Button onClick={() => General.downloadFile("figure.svg", svgstr())}>
+                    Download
+                </Button>
             </ButtonGroup>
         </Box>
         <Paper elevation={3}>
