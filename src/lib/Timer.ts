@@ -1,3 +1,4 @@
+import prettyMs from "pretty-ms"
 /**
  * Class for debug elapsed time
  */
@@ -16,5 +17,12 @@ export class Timer {
     public end() {
         const end = performance.now();
         return end - this.start;
+    }
+    /**
+     * 
+     * Ends the timer and returns the elapsed time formated as string
+     */
+    public endPretty() {
+        return prettyMs(this.end());
     }
 }

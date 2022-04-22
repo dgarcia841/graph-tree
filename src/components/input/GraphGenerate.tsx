@@ -1,5 +1,6 @@
 import { Box, Grid, TextField, Button, Tooltip } from "@mui/material"
 import React, { useState } from "react"
+import { Timer } from "../../lib/Timer";
 import Model from "../../Model";
 import AlertList from "../Alert/AlertList";
 import useAlert from "../Alert/useAlert";
@@ -41,9 +42,11 @@ export default () => {
     }
 
     function generateGraph() {
-        Model.generateRandomGraph({size, density, min, max});
+        const timer = new Timer();
+        Model.generateRandomGraph({ size, density, min, max });
+        const time = timer.endPretty();
         Model.update();
-        alerts.add("Graph generated successfully", "success");
+        alerts.add(`Finished in ${time}. Graph generated successfully`, "success");
     }
 
     return <Box m={1}>

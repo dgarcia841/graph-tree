@@ -6,7 +6,6 @@ import Model from "../../Model";
 import AlertList from "../Alert/AlertList";
 import useAlert from "../Alert/useAlert";
 import GraphContainer from "../GraphContainer";
-import prettyMs from "pretty-ms";
 
 export default () => {
     const [tree, setTree] = useState<[number, Graph] | undefined>(undefined);
@@ -14,7 +13,7 @@ export default () => {
     function runAlgorithm() {
         const timer = new Timer();
         const tree = Model.getMST();
-        const time = prettyMs(timer.end());
+        const time = timer.endPretty();
         setTree(tree);
         if (tree) {
             alerts.add(`Finished in ${time}. Minimun weight is: ${tree[0]}`, "success", 10e3);
