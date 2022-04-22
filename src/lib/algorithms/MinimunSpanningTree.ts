@@ -59,7 +59,9 @@ export default function MinimunSpanningTree(graph: Graph): [number, Graph] {
             // sum edge value to the min cost
             mincost += edge[2];
             // add the edge to the result
-            result.setEdge(...edge);
+            result.setEdge(edge[0], edge[1], edge[2]);
+            // in both directions
+            result.setEdge(edge[1], edge[0], edge[2]);
         }
         counter++;
     }
