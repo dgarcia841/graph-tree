@@ -15,8 +15,9 @@ export default () => {
             Graphs algorithms
         </Typography>
         <Typography variant="subtitle1">
-            This program implements the minimun spanning tree algorithm for a connected graph, and
-            finds the shortest path between two points in the resulting minimun spanning tree.
+            This program implements the PRIM's algorithm to find the minimun spanning tree
+            for a provided connected graph, and the Djikstra algorithm to find the shortest
+            path between two nodes in the provided graph.
         </Typography>
         <Typography variant="subtitle1">
             By Daniel García, 2022.
