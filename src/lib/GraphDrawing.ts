@@ -145,6 +145,9 @@ export class GraphDrawing {
         if (this.options.drawNodes) {
             this.drawNodes();
         }
+        if (this.options.drawEdgeValues) {
+            this.drawEdgeValues();
+        }
     }
 
     /**
@@ -164,6 +167,33 @@ export class GraphDrawing {
         });
 
         this.renderer.update();
+    }
+
+    /**
+     * Draw the edge values as numbers
+     */
+    public drawEdgeValues() {
+        if (!this.graph) return;
+        // Loop over every node in the graph
+        for (let i = 0; i < this.graph.size; i++) {
+            // the current node
+            const from = this.nodes[i];
+            // get all the nodes connected to the current one
+            const nodes = this.graph.getConnectedNodes(i);
+            for (let j = 0; j < nodes.length; j++) {
+                // draw the line between the current node i, and the connected node j
+                const to = this.nodes[nodes[j]];
+                // get edge value
+                const value = this.graph.getEdge(i, nodes[j]);
+                // edge vector
+                const vect = new Vector(from.x, from.y, to.x, to.y);
+                const len = vect.getSize();
+                // draw the text
+                vect.setSize(len - 16);
+                this.renderer.makeText(value + "", vect.x2, vect.y2, {alignment: "center"});
+            }
+            this.renderer.update();
+        }
     }
 
     /**
@@ -193,15 +223,10 @@ export class GraphDrawing {
 
                 // Draw a line if the edge is bidirectional, or an arrow if is directed
                 const vect = new Vector(from.x, from.y, to.x, to.y);
-                const len = vect.getSize();
-                vect.setSize(len- this.options.nodeRadius);
+                vect.setSize(vect.getSize() - this.options.nodeRadius);
                 const line = bidirection ?
                     this.renderer.makeLine(from.x, from.y, to.x, to.y) :
                     this.renderer.makeArrow(vect.x1, vect.y1, vect.x2, vect.y2, this.options.nodeRadius);
-                
-                // draw the text
-                vect.setSize(len - 16);
-                this.renderer.makeText(value + "", vect.x2, vect.y2, {alignment: "center"});
 
                 // Set the line color according to its value relative to the maximun
                 const relative = value / maxValue;
@@ -316,7 +341,11 @@ export namespace GraphDrawing {
         /**
          * When calling `.draw()`, draw the edges?
          */
-        drawEdges?: boolean
+        drawEdges?: boolean,
+        /**
+         * Draw edge value as numbers?
+         */
+        drawEdgeValues?: boolean
     }
 
     /**
@@ -340,6 +369,7 @@ export namespace GraphDrawing {
         edgeMin: General.rgb(255, 0, 0),
         edgeMax: General.rgb(0, 255, 0),
         drawNodes: true,
-        drawEdges: true
+        drawEdges: true,
+        drawEdgeValues: true
     }
 }
