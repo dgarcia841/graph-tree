@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material"
+import { Link, List, ListItem, ListItemText, Typography } from "@mui/material"
 import React, { useReducer } from "react"
 import Model from "../Model"
 import GraphField from "./input/GraphField"
@@ -46,5 +46,18 @@ export default () => {
             Find the input graph's minimun spanning tree by using an implementation of PRIM's algorithm.
         </Typography>
         <GraphSpanningTree />
+        <Typography variant="h2">
+            References
+        </Typography>
+        <List>
+            <ListItem>
+                <ListItemText>
+                    Minimun spanning tree:
+                    <Link target="_blank" href="https://www.geeksforgeeks.org/prims-algorithm-simple-implementation-for-adjacency-matrix-representation/">
+                        Geeksforgeeks.org
+                    </Link>
+                </ListItemText>
+            </ListItem>
+        </List>
     </React.Fragment>
 }
