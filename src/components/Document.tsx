@@ -3,6 +3,7 @@ import React, { useReducer } from "react"
 import Model from "../Model"
 import GraphField from "./input/GraphField"
 import GraphGenerate from "./input/GraphGenerate"
+import GraphShortestPath from "./input/GraphShortestPath"
 import GraphSpanningTree from "./input/GraphSpanningTree"
 import GraphVisualize from "./input/GraphVisualize"
 
@@ -48,6 +49,14 @@ export default () => {
         </Typography>
         <GraphSpanningTree />
         <Typography variant="h2">
+            Find the shortest path
+        </Typography>
+        <Typography variant="body1">
+            Find the shortest path between two nodes in the graph by using Djikstra's algorithm.
+        </Typography>
+        <GraphShortestPath />
+
+        <Typography variant="h2">
             References
         </Typography>
         <List>
@@ -56,6 +65,12 @@ export default () => {
                     Minimun spanning tree:
                     <Link target="_blank" href="https://www.geeksforgeeks.org/prims-algorithm-simple-implementation-for-adjacency-matrix-representation/">
                         Geeksforgeeks.org
+                    </Link>
+                </ListItemText>
+                <ListItemText>
+                    Shortest path:
+                    <Link target="_blank" href="https://www.codingame.com/playgrounds/7656/los-caminos-mas-cortos-con-el-algoritmo-de-dijkstra/el-algoritmo-de-dijkstra">
+                        Codingame.com
                     </Link>
                 </ListItemText>
             </ListItem>

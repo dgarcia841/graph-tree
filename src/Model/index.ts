@@ -1,4 +1,5 @@
 import MinimunSpanningTree from "../lib/algorithms/MinimunSpanningTree";
+import ShortestPath from "../lib/algorithms/ShortestPath";
 import { Graph } from "../lib/Graph";
 
 class Model {
@@ -14,12 +15,16 @@ class Model {
 
     private graph?: Graph;
     private MST?: [number, Graph];
+    private shortestPath?: [number, Graph];
+    private shortestPathNodes?: [number, number];
     private _onUpdate?: () => void;
     private constructor() { }
 
     public generateRandomGraph(props: Graph.IGenerateRandomProps) {
         this.graph = Graph.generateRandom(props);
         this.MST = undefined;
+        this.shortestPath = undefined;
+        this.shortestPathNodes = undefined;
     }
     
     public getGraph() {
@@ -28,6 +33,8 @@ class Model {
     public setGraph(graph: Graph) {
         this.graph = graph;
         this.MST = undefined;
+        this.shortestPath = undefined;
+        this.shortestPathNodes = undefined;
     }
 
     public onUpdate(event: () => void) {
@@ -46,6 +53,18 @@ class Model {
             this.MST = MinimunSpanningTree(this.graph);
         }
         return this.MST;
+    }
+
+    public getShortestPath(a: number, b: number) {
+        if (!this.graph) return undefined;
+        // Return the existing shortest path, if extists.
+        if (this.shortestPath && this.shortestPathNodes &&
+            this.shortestPathNodes[0] == a && this.shortestPathNodes[1] == b) {
+            return this.shortestPath;
+        }
+        this.shortestPath = ShortestPath(this.graph, a, b);
+        this.shortestPathNodes = [a, b];
+        return this.shortestPath;
     }
 }
 
