@@ -1,3 +1,4 @@
+import DiameterOfGraph from "../lib/algorithms/DiameterOfGraph";
 import MinimunSpanningTree from "../lib/algorithms/MinimunSpanningTree";
 import ShortestPath from "../lib/algorithms/ShortestPath";
 import { Graph } from "../lib/Graph";
@@ -17,6 +18,7 @@ class Model {
     private MST?: [number, Graph];
     private shortestPath?: [number, Graph];
     private shortestPathNodes?: [number, number];
+    private diameter?: [number, Graph];
     private _onUpdate?: () => void;
     private constructor() { }
 
@@ -65,6 +67,14 @@ class Model {
         this.shortestPath = ShortestPath(this.graph, a, b);
         this.shortestPathNodes = [a, b];
         return this.shortestPath;
+    }
+
+    public getDiameter() {
+        if (!this.graph) return undefined;
+        if (!this.diameter) {
+            this.diameter = DiameterOfGraph(this.graph);
+        }
+        return this.diameter;
     }
 }
 

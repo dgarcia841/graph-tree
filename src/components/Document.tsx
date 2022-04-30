@@ -1,6 +1,7 @@
 import { Link, List, ListItem, ListItemText, Typography } from "@mui/material"
 import React, { useReducer } from "react"
 import Model from "../Model"
+import GraphDiameter from "./input/GraphDiameter"
 import GraphField from "./input/GraphField"
 import GraphGenerate from "./input/GraphGenerate"
 import GraphShortestPath from "./input/GraphShortestPath"
@@ -55,6 +56,13 @@ export default () => {
             Find the shortest path between two nodes in the graph by using Djikstra's algorithm.
         </Typography>
         <GraphShortestPath />
+        <Typography variant="h2">
+            Find the diameter
+        </Typography>
+        <Typography variant="body1">
+            Find the diameter of the graph. This is the maximum shortest path between any two nodes.
+        </Typography>
+        <GraphDiameter />
 
         <Typography variant="h2">
             References
@@ -67,10 +75,20 @@ export default () => {
                         Geeksforgeeks.org
                     </Link>
                 </ListItemText>
+            </ListItem>
+            <ListItem>
                 <ListItemText>
                     Shortest path:
                     <Link target="_blank" href="https://www.codingame.com/playgrounds/7656/los-caminos-mas-cortos-con-el-algoritmo-de-dijkstra/el-algoritmo-de-dijkstra">
                         Codingame.com
+                    </Link>
+                </ListItemText>
+            </ListItem>
+            <ListItem>
+                <ListItemText>
+                    Graph diameter:
+                    <Link target="_blank" href="https://mathworld.wolfram.com/GraphDiameter.html">
+                        Mathworld.wolfram.com
                     </Link>
                 </ListItemText>
             </ListItem>
