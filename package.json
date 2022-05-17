@@ -9,7 +9,9 @@
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production --node-env=production",
     "watch": "webpack --watch",
-    "serve": "webpack serve"
+    "serve": "webpack serve",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -20,7 +22,7 @@
   "bugs": {
     "url": "https://github.com/dgarcia841/graph-tree/issues"
   },
-  "homepage": "https://github.com/dgarcia841/graph-tree#readme",
+  "homepage": "https://dgarcia841.github.io/graph-tree",
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
@@ -30,6 +32,7 @@
     "@types/react": "^18.0.5",
     "@types/react-dom": "^18.0.1",
     "express": "^4.18.1",
+    "gh-pages": "^4.0.0",
     "js-priority-queue": "^0.1.5",
     "pretty-ms": "^7.0.1",
     "react": "^18.0.0",
